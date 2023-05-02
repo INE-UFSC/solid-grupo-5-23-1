@@ -17,4 +17,11 @@ class Animal:
     def save(self, animal: Animal):
         pass
 
+class AnimalDB:
+    #Classe para armazenar os animais
+    def __init__(self, name: str):
+        self.name = name
+        self.animais = list()
+
+
 

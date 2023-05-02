@@ -30,6 +30,7 @@ def animal_sound(animals: list):
 animal_sound(animals)
 
 
+
 """
 Outro exemplo:
 
@@ -49,3 +50,10 @@ class Discount:
             if self.customer == 'vip':
                 return self.price * 0.4
 
+
+class Animal:
+    def __init__(self, name):
+        self.__name = name
+        self.name = str
+
+    
