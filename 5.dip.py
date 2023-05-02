@@ -4,21 +4,21 @@ Dependency Inversion Principle
 Dependências devem ser feitas sobre abstrações, não sobre implementações concretas 
 
 """
-
-
 from abc import ABC, abstractmethod
 
-class Character(ABC):
-    @abstractmethod
-    def hp(self):
-        pass
+
+class IStatsReporter(ABC):
+
+    def __init__(self, char: Player):
+        self.__char = char
 
     @abstractmethod
-    def name(self):
+    def report(self):
         pass
 
-class Player(Character):
-    def __init__(self, name):
+class Player:
+    def __init__(self, name, stats: IStatsReporter):
+        self.__stats = stats
         self.__name = name
         self.__hp = 100
         self.__speed = 1
@@ -28,11 +28,18 @@ class Player(Character):
 
     def name(self):
         return self.__name
+    
+    def speed(self):
+        return self.__speed
+    
+    def report(self):
+        return self.__stats.report()
 
-class StatsReporter:
-    def __init__(self, char: Character):
-        self.char = char
+class StatsReporter(IStatsReporter):
+    def __init__(self, char: Player):
+        super().__init__(char)
 
     def report(self):
-        print(f'Name:{self.char.name()}')
-        print(f'HP:{self.char.hp()}')
+        print(f'Name:{super().char.name()}')
+        print(f'HP:{super().char.hp()}')
+        print(f'Speed:{super().char.speed()}')
