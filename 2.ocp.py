@@ -50,7 +50,6 @@ class Discount:
             if self.customer == 'vip':
                 return self.price * 0.4
 
-
 class Animal:
     def __init__(self, name):
         self.__name = name
