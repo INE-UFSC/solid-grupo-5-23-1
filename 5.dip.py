@@ -6,9 +6,19 @@ Dependências devem ser feitas sobre abstrações, não sobre implementações c
 """
 
 
-class Player:
+from abc import ABC, abstractmethod
+
+class Character(ABC):
+    @abstractmethod
+    def hp(self):
+        pass
+
+    @abstractmethod
+    def name(self):
+        pass
+
+class Player(Character):
     def __init__(self, name):
-        self.stats = StatsReporter(self)
         self.__name = name
         self.__hp = 100
         self.__speed = 1
@@ -20,7 +30,7 @@ class Player:
         return self.__name
 
 class StatsReporter:
-    def __init__(self, char: Player):
+    def __init__(self, char: Character):
         self.char = char
 
     def report(self):
